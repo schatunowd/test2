@@ -1,0 +1,10 @@
+<table>
+<row><num>1</num><id_room>1</id_room><floor>2</floor><square>20.00</square><temperature>30.00</temperature><humidity>50.00</humidity></row>
+<row><num>2</num><id_room>2</id_room><floor>1</floor><square>100.00</square><temperature>10.00</temperature><humidity>20.00</humidity></row>
+<row><num>3</num><id_room>3</id_room><floor>4</floor><square>10.00</square><temperature>20.00</temperature><humidity>10.20</humidity></row>
+<row><num>4</num><id_room>4</id_room><floor>12</floor><square>10.20</square><temperature>12.80</temperature><humidity>22.34</humidity></row>
+<row><num>5</num><id_room>9</id_room><floor>2</floor><square>28.20</square><temperature>36.60</temperature><humidity>20.20</humidity></row>
+<row><num>6</num><id_room>10</id_room><floor>2</floor><square>28.20</square><temperature>36.60</temperature><humidity>20.20</humidity></row>
+<row><num>7</num><id_room>11</id_room><floor>1</floor><square>2.00</square><temperature>3.00</temperature><humidity>4.00</humidity></row>
+<row><num>8</num><id_room>12</id_room><floor>1</floor><square>10.00</square><temperature>20.00</temperature><humidity>30.00</humidity></row>
+</table>

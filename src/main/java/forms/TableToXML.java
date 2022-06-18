@@ -1,19 +1,28 @@
+package forms;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class TableToXML{
 
-    private final String login = "root", passwd = "Dima1837!", host = "jdbc:mysql://localhost:3306/stuff", tableName;
+    private static final String login = "root";
+    private static final String passwd = "Dima1837!";
+    private static final String host = "jdbc:mysql://localhost:3306/stuff";
+    private static String tableName = null;
 
     public TableToXML(String tablename){
         this.tableName = tablename;
     }
 
-    public String getTableData() throws SQLException, ClassNotFoundException {
+    public static String getTableData() throws SQLException, ClassNotFoundException {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
@@ -42,21 +51,11 @@ public class TableToXML{
                 b.append("</row>\n");
             }
             b.append("</table>");
-            Date date = new Date();
-            SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-            String fileName = tableName + "_" + formatForDateNow.format(date) + ".xml";
-            File f = new File("D:\\study\\intellij idea\\test2\\xml\\" + fileName);
-            f.createNewFile();
-            PrintWriter writer = new PrintWriter(f);
-            writer.println(b);
-            writer.close();
             return b.toString();
         } catch (SQLException e) {
             throw e;
         } catch (ClassNotFoundException e) {
             throw e;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         } finally {
             if (rs != null)
                 try {
@@ -73,6 +72,36 @@ public class TableToXML{
                     con.close();
                 } catch (SQLException e) {
                 }
+        }
+    }
+
+    public static void SaveXML(String tableName,  JFrame mainFrame)
+    {
+        String answer;
+        try {
+            TableToXML a = new TableToXML(tableName);
+            answer = a.getTableData();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
+        FileDialog fDialog = new FileDialog(mainFrame, "Сохранить " + tableName + "в XML", FileDialog.SAVE);
+        fDialog.setVisible(true);
+        String path = fDialog.getDirectory() + fDialog.getFile();
+        File f = new File(path);
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter(f);
+        } catch (FileNotFoundException ex) {
+            throw new RuntimeException(ex);
+        }
+        writer.println(answer);
+        writer.close();
+        try {
+            f.createNewFile();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
     }
 
